@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { BiPhoneCall } from 'react-icons/bi'
+import React, { useContext, useEffect, useState } from 'react'
+import { RiLoginCircleLine } from 'react-icons/ri'
+import Modal from './Modal'
+import { Link } from 'react-router-dom'
+import { AuthContext } from 'contexts/AuthProvider'
+import Profile from 'pages/Profile'
 
 const navItemsName = [
 	{
@@ -50,6 +54,10 @@ const navItemsName = [
 
 const Navbar = () => {
 	const [isSticky, setisSticky] = useState(false)
+
+	const { user } = useContext(AuthContext)
+
+	console.log(user)
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -166,7 +174,7 @@ const Navbar = () => {
 
 					<div className="navbar-end">
 						{/* search btn */}
-						<button className="btn btn-ghost btn-circle mr-1 hidden md:block">
+						<button className="lg:flex btn btn-ghost btn-circle mr-1 hidden md:block">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="h-5 w-5"
@@ -208,9 +216,16 @@ const Navbar = () => {
 								</span>
 							</div>
 						</div>
-						<a className="btn bg-green rounded-full px-6 text-white flex items-center gap-2">
-							<BiPhoneCall /> Contact
-						</a>
+						{user ? (
+							<Profile user={user} />
+						) : (
+							<Link to="/login">
+								<button className="btn bg-green rounded-full px-6 text-white flex items-center gap-2">
+									<RiLoginCircleLine size={18} /> Log In
+								</button>
+							</Link>
+						)}
+						<Modal />
 					</div>
 				</div>
 			</header>

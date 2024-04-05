@@ -12,7 +12,7 @@ const Cards = ({ item }) => {
 		<>
 			<div className="card shadow-md relative mr-5 md:my-5">
 				<div
-					className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green ${
+					className={`rating gap-1 absolute right-2 top-2 p-4 heartStar bg-green z-10 transition-all duration-200 ${
 						isHeartFilled ? 'text-rose-500' : 'text-white'
 					}`}
 					onClick={handleHeartClick}
@@ -38,7 +38,9 @@ const Cards = ({ item }) => {
 							<span className="text-sm text-red">$</span>
 							{item?.price}
 						</h5>
-						<button className="btn bg-green">Buy Now</button>
+						<button className="btn bg-green text-white rounded-full">
+							Buy Now
+						</button>
 					</div>
 				</div>
 			</div>
